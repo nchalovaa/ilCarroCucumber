@@ -1,6 +1,6 @@
-Feature: Login
+Feature: AddCar
 
-  @validData
+  @addCar
   Scenario: Add auto with valid data
     Given User launches Chrome browser
     When User opens ilCarro HomePage

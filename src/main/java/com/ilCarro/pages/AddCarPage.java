@@ -13,12 +13,12 @@ import java.util.Map;
 
 public class AddCarPage extends BasePage {
 
-    @FindBy(id="pickUpPlace")
-    WebElement pickUpPlace;
-
     public AddCarPage(WebDriver driver) {
         super(driver);
     }
+
+    @FindBy(id = "pickUpPlace")     //(id="pickUpPlace")
+    WebElement pickUpPlace;
 
     public AddCarPage enterData(String address) {
         type(pickUpPlace, address);

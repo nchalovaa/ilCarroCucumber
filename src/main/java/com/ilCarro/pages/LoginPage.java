@@ -52,18 +52,11 @@ public class LoginPage extends BasePage{
     }
 
 
-    @FindBy(css=".positive-button ng-star-inserted")
+    @FindBy(css=".positive-button.ng-star-inserted")
     WebElement okButton;
-    public LoginPage clickOnOkButton() {
+    public SearchCarPage clickOnOkButton() {
         click(okButton);
-        return this;
+        return new SearchCarPage(driver);
     }
 
-
-    @FindBy(id="1")
-    WebElement letTheCarWorkButton;
-    public AddCarPage clickOnLetTheCarWorkButton() {
-        click(letTheCarWorkButton);
-        return new AddCarPage(driver);
-    }
 }

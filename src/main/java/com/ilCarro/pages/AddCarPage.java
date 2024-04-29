@@ -2,6 +2,7 @@ package com.ilCarro.pages;
 
 import io.cucumber.datatable.DataTable;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,13 +31,7 @@ public class AddCarPage extends BasePage {
         String manufacture = dataTable.get(0).get("manufacture");
         String model = dataTable.get(0).get("model");
         String year = dataTable.get(0).get("year");
-        String fuel = dataTable.get(0).get("fuel");
-        String seats = dataTable.get(0).get("seats");
-        String carClass = dataTable.get(0).get("carClass");
-        String carRegistrationNumber = dataTable.get(0).get("carRegistrationNumber");
-        String carPrice = dataTable.get(0).get("carPrice");
-
-        enterDataCar(manufacture,model,year, fuel,seats,carClass,carRegistrationNumber,carPrice);
+        enterDataCar(manufacture,model,year);
         return this;
     }
 
@@ -50,33 +45,14 @@ public class AddCarPage extends BasePage {
     @FindBy(id="year")
     WebElement thirdRow;
 
-    @FindBy(id="fuel")
-    WebElement fourthRow;
 
-    @FindBy(id="seats")
-    WebElement fifthRow ;
-
-    @FindBy(id="class")
-    WebElement sixthRow;
-
-    @FindBy(id="serialNumber")
-    WebElement seventhRow;
-
-    @FindBy(id="price")
-    WebElement eightRow;
-
-
-    public AddCarPage enterDataCar(String manufacture, String model, String year, String fuel, String seats, String carClass, String carRegistrationNumber, String carPrice) {
+    public AddCarPage enterDataCar(String manufacture, String model, String year) {
         type(firstRow, manufacture);
         type(secondRow, model);
         type(thirdRow, year);
-        type(fourthRow, fuel);
-        type(fifthRow,seats);
-        type(sixthRow, carClass);
-        type(seventhRow, carRegistrationNumber);
-        type(eightRow,carPrice);
         return this;
     }
+
 
     @FindBy(id="about")
     WebElement about;
@@ -108,5 +84,48 @@ public class AddCarPage extends BasePage {
     public AddCarPage verifyMessage(String text) {
         Assert.assertTrue(message.getText().contains(text));
         return this;
+    }
+
+    public AddCarPage enterCarDataSecondPart(DataTable table) {
+        List<Map<String, String>> dataTable = table.asMaps();
+
+        String seats = dataTable.get(0).get("seats");
+        String carClass = dataTable.get(0).get("carClass");
+        String carRegistrationNumber = dataTable.get(0).get("carRegistrationNumber");
+        String carPrice = dataTable.get(0).get("carPrice");
+
+        enterDataCarSecondPart(seats,carClass,carRegistrationNumber,carPrice);
+        return this;
+    }
+
+    @FindBy(id="seats")
+    WebElement fifthRow ;
+
+    @FindBy(id="class")
+    WebElement sixthRow;
+
+    @FindBy(id="serialNumber")
+    WebElement seventhRow;
+
+    @FindBy(id="price")
+    WebElement eightRow;
+
+    public AddCarPage enterDataCarSecondPart(String seats, String carClass, String carRegistrationNumber, String carPrice) {
+
+        type(fifthRow,seats);
+        type(sixthRow, carClass);
+        type(seventhRow, carRegistrationNumber);
+        type(eightRow,carPrice);
+        return this;
+    }
+
+    @FindBy(id="fuel")
+    WebElement fourthRow;
+
+    public AddCarPage selectOption(String petrol) {
+            click(fourthRow);
+            fourthRow.sendKeys(petrol);
+            fourthRow.sendKeys(Keys.ENTER);
+            return this;
     }
 }

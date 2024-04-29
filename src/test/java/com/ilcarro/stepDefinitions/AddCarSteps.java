@@ -53,6 +53,8 @@ public class AddCarSteps {
     @And("And User enters Car details")
     public void enters_Car_details(DataTable table){
         new AddCarPage(driver).enterCarData(table);
+        new AddCarPage(driver).selectOption("Petrol");
+        new AddCarPage(driver).enterCarDataSecondPart(table);
     }
 
     @And("User enters the text About")
